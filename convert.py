@@ -17,6 +17,7 @@ options, remainder = getopt.getopt(sys.argv[1:], "d:C:", ["root-dir=", "class-ma
 
 root_dir = "."
 meta_path = root_dir + "/meta.json"
+output_basename = "new_ann"
 name_mappings = {}
 
 for option, argument in options:
@@ -47,18 +48,23 @@ for source in name_mappings:
             break
     mappings[source_id] = (destination_id, destination)
             
-l = os.path.join(root_dir, "*/ann")
-if not ann_dir: ann_dir = glob.glob(l)[0]
+dataset = os.path.dirname(glob.glob(os.path.join(root_dir, "*/ann"))[0])
+ann_dir = os.path.join(dataset, "ann")
+output_dir = os.path.join(dataset, output_basename)
+if not os.path.isdir(output_dir):
+    os.mkdir(output_dir)
 
-image_metas = [json.load(open(os.path.join(ann_dir, path))) for path in os.listdir(ann_dir)]
+image_meta_paths = os.listdir(ann_dir)
+image_metas = [(path, json.load(open(os.path.join(ann_dir, path)))) for path in image_meta_paths]
 
+# See: https://legacy.docs.supervise.ly/ann_format/#bitmap
 def base64_2_mask(s):
     z = zlib.decompress(base64.b64decode(s))
     n = np.fromstring(z, np.uint8)
     mask = cv2.imdecode(n, cv2.IMREAD_UNCHANGED)[:, :, 3].astype(bool)
     return mask
 
-for image_meta in image_metas:
+for path, image_meta in image_metas:
     for obj in image_meta["objects"]:
         if obj["geometryType"] == "bitmap":
             bitmap = obj["bitmap"]
@@ -80,4 +86,6 @@ for image_meta in image_metas:
                 ],
                 "interior" : []
             }
-            print(rectangle)
+            image_meta["objects"].append(rectangle)
+    output_file = open(os.path.join(output_dir, path), "w")
+    json.dump(image_meta, output_file, indent=4)
