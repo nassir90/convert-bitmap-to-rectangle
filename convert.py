@@ -13,12 +13,11 @@ import sys
 import glob
 import re
 
-options, remainder = getopt.getopt(sys.argv[1:], "d:m:C:", ["root-dir=", "meta-file=", "class-map-file="])
+options, remainder = getopt.getopt(sys.argv[1:], "d:C:", ["root-dir=", "class-map-file="])
 
 root_dir = "."
 meta_path = root_dir + "/meta.json"
-ann_dir = ""
-class_map = {}
+name_mappings = {}
 
 for option, argument in options:
     if option in ("-d", "--root-dir"):
@@ -29,13 +28,13 @@ for option, argument in options:
         for mapping in class_map_file:
             source, destination = mapping.split("=")
             destination = re.sub("#.*$", "", destination).strip()
-            class_map[source] = destination
+            name_mappings[source] = destination
 
 meta = json.load(open(meta_path))
 
 mappings = {}
 
-for source in class_map:
+for source in name_mappings:
     source_id = ""
     destination_id = ""
     for klass in meta["classes"]:
