@@ -1,5 +1,4 @@
 import zlib
-import copy
 import getopt
 import cv2
 import base64
@@ -11,36 +10,36 @@ import sys
 import glob
 import re
 
-options, remainder = getopt.getopt(sys.argv[1:], "d:C:", ["root-dir=", "class-map-file="])
+options, remainder = getopt.getopt(sys.argv[1:], "d:m:", ["root-dir=", "mappings="])
 
 root_dir = "."
-meta_path = root_dir + "/meta.json"
+project_meta_path = root_dir + "/meta.json"
 output_basename = "new_ann"
 name_mappings = {}
 
 for option, argument in options:
     if option in ("-d", "--root-dir"):
         root_dir = argument
-        meta_path = os.path.join(root_dir, "meta.json")
-    elif option in ("-C", "--class-map-file"):
-        class_map_file = open(argument)
-        for mapping in class_map_file:
+        project_meta_path = os.path.join(root_dir, "meta.json")
+    elif option in ("-m", "--mappings"):
+        name_map_file = open(argument)
+        for mapping in name_map_file:
             source, destination = mapping.split("=")
             destination = re.sub("#.*$", "", destination).strip()
             name_mappings[source] = destination
 
-meta = json.load(open(meta_path))
+project_meta = json.load(open(project_meta_path))
 
 mappings = {}
 
 for source in name_mappings:
     source_id = ""
     destination_id = ""
-    for klass in meta["classes"]:
+    for klass in project_meta["classes"]:
         if klass["title"] == source:
             source_id = klass["id"]
             break
-    for klass in meta["classes"]:
+    for klass in project_meta["classes"]:
         if klass["title"] == destination:
             destination_id = klass["id"]
             break
@@ -52,8 +51,8 @@ output_dir = os.path.join(dataset, output_basename)
 if not os.path.isdir(output_dir):
     os.mkdir(output_dir)
 
-image_meta_paths = os.listdir(ann_dir)
-image_metas = [(path, json.load(open(os.path.join(ann_dir, path)))) for path in image_meta_paths]
+image_meta_paths = glob.glob(os.path.join(ann_dir, "*"))
+image_metas = [(image_meta_path, json.load(open(image_meta_path))) for image_meta_path in image_meta_paths]
 
 # See: https://legacy.docs.supervise.ly/ann_format/#bitmap
 def base64_2_mask(s):
@@ -62,28 +61,29 @@ def base64_2_mask(s):
     mask = cv2.imdecode(n, cv2.IMREAD_UNCHANGED)[:, :, 3].astype(bool)
     return mask
 
-for path, image_meta in image_metas:
+for image_meta_path, image_meta in image_metas:
+    image_meta_basename = os.path.basename(image_meta_path)
     for obj in image_meta["objects"]:
         if obj["geometryType"] == "bitmap":
             bitmap = obj["bitmap"]
-            mask = base64_2_mask(bitmap["data"])
-            height, width = mask.shape
-            rectangle = {}
-            rectangle["classId"] = mappings[obj["classId"]][0]
-            rectangle["geometryType"] = "rectangle"
-            rectangle["labelerLogin"] = obj["labelerLogin"]
-            rectangle["tags"] = obj["tags"]
-            rectangle["classTitle"] = mappings[obj["classId"]][1]
-            rectangle["points"] = {
-                "exterior" : [
-                    bitmap["origin"],
-                    [
-                        bitmap["origin"][0] + width,
-                        bitmap["origin"][1] + height,
-                    ]
-                ],
-                "interior" : []
+            height, width = base64_2_mask(bitmap["data"]).shape
+            rectangle = {
+                "classId" : mappings[obj["classId"]][0],
+                "geometryType" : "rectangle",
+                "labelerLogin" : obj["labelerLogin"],
+                "tags" : obj["tags"],
+                "classTitle" : mappings[obj["classId"]][1],
+                "points" : {
+                    "exterior" : [
+                        bitmap["origin"],
+                        [
+                            bitmap["origin"][0] + width,
+                            bitmap["origin"][1] + height,
+                        ]
+                    ],
+                    "interior" : []
+                }
             }
             image_meta["objects"].append(rectangle)
-    output_file = open(os.path.join(output_dir, path), "w")
+    output_file = open(os.path.join(output_dir, image_meta_basename), "w")
     json.dump(image_meta, output_file, indent=4)
