@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import zlib
 import copy
 import getopt
