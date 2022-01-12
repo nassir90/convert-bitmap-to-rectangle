@@ -1,0 +1,106 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 180,
+        "width": 640
+    },
+    "objects": [
+        {
+            "id": 833302286,
+            "classId": 9559157,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "chinaza",
+            "createdAt": "2021-11-23T15:34:30.050Z",
+            "updatedAt": "2021-11-26T14:54:30.915Z",
+            "tags": [],
+            "classTitle": "Cone",
+            "points": {
+                "exterior": [
+                    [
+                        125,
+                        97
+                    ],
+                    [
+                        176,
+                        179
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 833302288,
+            "classId": 9559157,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "chinaza",
+            "createdAt": "2021-11-23T15:34:32.990Z",
+            "updatedAt": "2021-11-26T14:54:30.915Z",
+            "tags": [],
+            "classTitle": "Cone",
+            "points": {
+                "exterior": [
+                    [
+                        504,
+                        91
+                    ],
+                    [
+                        545,
+                        154
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 833302291,
+            "classId": 9559157,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "chinaza",
+            "createdAt": "2021-11-23T15:34:35.932Z",
+            "updatedAt": "2021-11-26T14:54:30.915Z",
+            "tags": [],
+            "classTitle": "Cone",
+            "points": {
+                "exterior": [
+                    [
+                        291,
+                        77
+                    ],
+                    [
+                        304,
+                        98
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 834165830,
+            "classId": 9559157,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "chinaza",
+            "createdAt": "2021-11-26T14:54:30.854Z",
+            "updatedAt": "2021-11-26T14:54:30.854Z",
+            "tags": [],
+            "classTitle": "Cone",
+            "points": {
+                "exterior": [
+                    [
+                        371,
+                        72
+                    ],
+                    [
+                        379,
+                        88
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

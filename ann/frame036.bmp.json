@@ -1,0 +1,130 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 180,
+        "width": 640
+    },
+    "objects": [
+        {
+            "id": 834094499,
+            "classId": 9559157,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "chinaza",
+            "createdAt": "2021-11-26T14:45:23.910Z",
+            "updatedAt": "2021-11-26T14:45:40.239Z",
+            "tags": [],
+            "classTitle": "Cone",
+            "points": {
+                "exterior": [
+                    [
+                        512,
+                        95
+                    ],
+                    [
+                        551,
+                        165
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 834094504,
+            "classId": 9559157,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "chinaza",
+            "createdAt": "2021-11-26T14:45:27.107Z",
+            "updatedAt": "2021-11-26T14:45:40.239Z",
+            "tags": [],
+            "classTitle": "Cone",
+            "points": {
+                "exterior": [
+                    [
+                        95,
+                        120
+                    ],
+                    [
+                        128,
+                        179
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 834094506,
+            "classId": 9559157,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "chinaza",
+            "createdAt": "2021-11-26T14:45:29.229Z",
+            "updatedAt": "2021-11-26T14:45:40.239Z",
+            "tags": [],
+            "classTitle": "Cone",
+            "points": {
+                "exterior": [
+                    [
+                        284,
+                        78
+                    ],
+                    [
+                        297,
+                        106
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 834094509,
+            "classId": 9559157,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "chinaza",
+            "createdAt": "2021-11-26T14:45:31.785Z",
+            "updatedAt": "2021-11-26T14:45:40.239Z",
+            "tags": [],
+            "classTitle": "Cone",
+            "points": {
+                "exterior": [
+                    [
+                        382,
+                        76
+                    ],
+                    [
+                        392,
+                        95
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 834094515,
+            "classId": 9559157,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "chinaza",
+            "createdAt": "2021-11-26T14:45:40.174Z",
+            "updatedAt": "2021-11-26T14:45:40.174Z",
+            "tags": [],
+            "classTitle": "Cone",
+            "points": {
+                "exterior": [
+                    [
+                        311,
+                        74
+                    ],
+                    [
+                        318,
+                        91
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 180,
+        "width": 640
+    },
+    "objects": [
+        {
+            "id": 833291129,
+            "classId": 9559157,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "chinaza",
+            "createdAt": "2021-11-23T13:26:44.813Z",
+            "updatedAt": "2021-11-23T13:26:44.813Z",
+            "tags": [],
+            "classTitle": "Cone",
+            "points": {
+                "exterior": [
+                    [
+                        300,
+                        77
+                    ],
+                    [
+                        309,
+                        99
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}
