@@ -82,7 +82,8 @@ for image_meta_path, image_meta in image_metas:
                         ]
                     ],
                     "interior" : []
-                }
+                },
+                "sourceBitmap" : obj["id"] 
             }
             image_meta["objects"].append(rectangle)
     output_file = open(os.path.join(output_dir, image_meta_basename), "w")
