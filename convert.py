@@ -1,26 +1,31 @@
 import zlib
 import getopt
-import cv2
 import base64
-from matplotlib import pyplot as plt
 import json
 import numpy as np
+import cv2
 import os
 import sys
 import glob
 import re
 
-options, remainder = getopt.getopt(sys.argv[1:], "d:m:", ["root-dir=", "mappings="])
+options, remainder = getopt.getopt(sys.argv[1:], "hd:m:D:", ["--help", "root-dir=", "mappings=","dataset="])
 
 root_dir = "."
 project_meta_path = root_dir + "/meta.json"
+dataset = ""
 output_basename = "new_ann"
 name_mappings = {}
 
 for option, argument in options:
-    if option in ("-d", "--root-dir"):
+    if option in ("-h", "--help"):
+        print(open("help").read())
+        quit()
+    elif option in ("-d", "--root-dir"):
         root_dir = argument
         project_meta_path = os.path.join(root_dir, "meta.json")
+    elif option in ("-D", "--dataset"):
+        dataset = argument
     elif option in ("-m", "--mappings"):
         name_map_file = open(argument)
         for mapping in name_map_file:
@@ -45,7 +50,7 @@ for source in name_mappings:
             break
     mappings[source_id] = (destination_id, destination)
             
-dataset = os.path.dirname(glob.glob(os.path.join(root_dir, "*/ann"))[0])
+if not dataset: dataset = os.path.dirname(glob.glob(os.path.join(root_dir, "*/ann"))[0])
 ann_dir = os.path.join(dataset, "ann")
 output_dir = os.path.join(dataset, output_basename)
 if not os.path.isdir(output_dir):
@@ -87,4 +92,5 @@ for image_meta_path, image_meta in image_metas:
             }
             image_meta["objects"].append(rectangle)
     output_file = open(os.path.join(output_dir, image_meta_basename), "w")
-    json.dump(image_meta, output_file, indent=4)
+    json.dump
+    quit()(image_meta, output_file, indent=4)

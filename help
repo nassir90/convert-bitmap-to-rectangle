@@ -1,0 +1,10 @@
+-h, --help
+        Print this help file
+-m, --mappings [mappings-file]
+        The mappings file should contain lines in the format `source-class-name=destination-class-name`. In our case, these will include `seg-blue-cone=blue-cone` .etc.
+-d, --root-dir [root-dir]
+        This is the root directory of the exported project (the one containing meta.json)
+-D, --dataset [dataset-name]
+        Datasets are folders in the root directory containing an "ann" folder.
+        By default, the dataset is selected automatically.
+        

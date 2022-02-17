@@ -1,1 +1,5 @@
-seg-cone=Cone
+seg_blue_cone=blue_cone
+seg_yellow_cone=yellow_cone
+seg_orange_cone=orange_cone
+seg_unknown_cone=unknown_cone
+seg_large_orange_cone=large_orange_cone
